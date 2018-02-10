@@ -16,6 +16,16 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <div id="tester" style="width:600px;height:250px;"></div>
   <script>
+
+    var data = []
+    
+    var sleep = time => new Promise(resolve => setTimeout(resolve, time))
+    var poll = (promiseFn, time) => promiseFn().then(
+                sleep(time).then(() => poll(promiseFn, time)))
+
+    // Greet the World every second
+    poll(() => new Promise(() => console.log('Hello World!')), 1000)
+
     function rand() { 
       return Math.random();
     }
