@@ -13,5 +13,18 @@
   <menu>
     <li><button type="button">click to see graphs containing flush data</button></a></li>
     </menu>
+  <!-- Latest compiled and minified plotly.js JavaScript -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <div id="tester" style="width:600px;height:250px;"></div>
+  <script>
+      var data = [
+          {
+              z: [[1, 20, 30], [20, 1, 60], [30, 60, 1]],
+              type: 'heatmap'
+          }
+      ];
+
+      Plotly.newPlot('tester', data);
+  </script>
 </body>
 </html> 
