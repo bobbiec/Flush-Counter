@@ -4,14 +4,21 @@ from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+
 app = Flask(__name__)
+
+
 app.config.from_object('config')
 db = SQLAlchemy(app)
+from models import Cluster,Toilet,Flush
 migrate = Migrate(app, db)
+
+import test_json as t
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html',values=jsonify(t))
+    # cluster=jsonify(Cluster()), toilet=jsonify(Toilet()),flush=jsonify(Flush())
 
 @app.route('/graphs')
 def giraffe():
