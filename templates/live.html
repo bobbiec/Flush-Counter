@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flush Analytics</title>
+  <script src="src/model/Book.js"></script>
+</head>
+<body>
+  <h1>G-RAPHS</h1>
+  <h2></h2>
+  <p>This app supports the following animals:</p>
+  <menu>
+    <li><a href="/"><button type="button">click to go back</button></a></li>
+    </menu>
+  <!-- Latest compiled and minified plotly.js JavaScript -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <div id="tester" style="width:600px;height:250px;"></div>
+  <script>
+    function rand() { 
+      return Math.random();
+    }
+
+    Plotly.plot('graph', [{
+      y: [1,2,3].map(rand),
+      mode: 'lines',
+      line: {color: '#80CAF6'}
+    }]);
+
+    var cnt = 0;
+
+    var interval = setInterval(function() {
+  
+      Plotly.extendTraces('graph', {
+       y: [[rand()]]
+     }, [0])
+
+     if(cnt === 100) clearInterval(interval);
+    }, 300);
+  </script>
+</body>
+</html> 
+
+
+
