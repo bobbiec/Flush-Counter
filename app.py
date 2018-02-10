@@ -1,11 +1,13 @@
 from flask import Flask, request
+from flask import render_template
+
 
 app = Flask(__name__)
 app.config.from_object('config')
 
-@app.route('/')
+@app.route('/home/')
 def home():
-    return "Hello World"
+    return render_template('index.html')
 
 
 @app.route('/report-flush', methods=['GET', 'POST'])
