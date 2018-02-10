@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+import datetime
 
 app = Flask(__name__)
 
@@ -27,6 +27,25 @@ def cartography():
 @app.route('/simulator')
 def nogoodnames():
     return render_template('simulator.html')
+
+@app.route('/do-flush')
+def do_flush():
+    f = Flush()
+    f.time = datetime.datetime.now()
+    f.toilet_id = 37
+    f.flush_type = 0
+    db.session.add(f)
+    db.session.commit()
+    return "Successful flush!"
+
+@app.route('/stream')
+def stream():
+    data = Flush.query.filter_by(toilet_id=37).all()
+    return jsonify([a.serialize() for a in data])
+
+@app.route('/live')
+def live():
+    return render_template('live.html')
 
 @app.route('/report-flush', methods=['POST'])
 def report_flush():
