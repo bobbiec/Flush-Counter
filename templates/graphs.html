@@ -27,7 +27,6 @@
       Plotly.newPlot('tester', data);
   </script>
 
-
 <head>
   <!-- Plotly.js -->
           <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -40,9 +39,19 @@
             
 Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv', function(err, rows){
       function unpack(rows, key) {
-          return rows.map(function(row) { return row[key]; });
+          //return rows.map(function(row) {return row[key];});
+          
+          if (key != 'z') {
+              return rows.map(function(row) { 
+                  return (Math.floor(2*row[key])); 
+                  });
+          }
+          else {
+              return rows.map(function(row) {return Math.floor(row[key]/8);});  
+          }
+          
       }
-  
+    
  var data = [{
    x: unpack(rows, 'x'),
    y: unpack(rows, 'y'),
@@ -51,7 +60,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_sh
    type: 'scatter3d',
    marker: {
      color: 'rgb(23, 190, 207)',
-     size: 2
+     size: 2    
    }},{
      alphahull: 7,
      opacity: 0.1,
@@ -99,7 +108,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_sh
             zeroline: false
         }
     },
-    title: '3d point clustering',
+    title: 'Location of flushes at specific hour',
     width: 477
   };
 
@@ -107,7 +116,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_sh
 
 });
 
-      </script>
-      </body>
+    </script>
+    </body>
 </body>
 </html> 
