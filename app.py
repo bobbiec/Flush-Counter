@@ -31,17 +31,17 @@ def nogoodnames():
 @app.route('/do-flush')
 def do_flush():
     f = Flush()
-    f.time = datetime.datetime()
+    f.time = datetime.datetime.now()
     f.toilet_id = 37
     f.flush_type = 0
-    db.session.add(flush)
+    db.session.add(f)
     db.session.commit()
     return "Successful flush!"
 
 @app.route('/stream')
 def stream():
-    data = Flush.query(toilet_id=37).all()
-    return jsonify(data)
+    data = Flush.query.filter_by(toilet_id=37).all()
+    return jsonify([a.serialize() for a in data])
 
 @app.route('/live')
 def live():
