@@ -126,6 +126,7 @@
           y: unpack(rows, 'y'),
           z: unpack(rows, 'z')
         }];
+
         var layout = {
           autosize: true,
           height: 480,
@@ -166,7 +167,6 @@
               y: 0,
               z: 1
             }
-            <<<<<<< HEAD
           },
           xaxis: {
             type: 'linear',
@@ -179,8 +179,7 @@
           zaxis: {
             type: 'linear',
             zeroline: false
-          }
-        },
+          },
         title: 'Location of flushes at specific hour',
         width: 477
       };
@@ -188,18 +187,5 @@
     });
   </script>
   <a href="{{ url_for('info') }}"><h3 style="text-align:center">How it works --></h3></a>
-  =======
-},
-title: 'Location of flushes at specific hour in UC',
-width: 700
-};
-
-Plotly.newPlot('myDiv', data, layout);
-
-});
-
-</script>
-</body>
->>>>>>> front_end
 </body>
 </html> 
