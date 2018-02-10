@@ -9,19 +9,18 @@
   <h2></h2>
   <p>This app supports the following operations:</p>
   <menu>
-      <li><button onclick="getElementById('flushText').InnerHTML = '<p>blah<p>'" type="button" class="flushButton"> flush for yourself!
+      <li><button onclick="playSound()" type="button" class="flushButton"> flush for yourself!
       <audio id="audio" src="{{ url_for('static', filename = 'Toilet_Flushing-KevanGC-917782919.mp3') }}"></audio>
       <script>
         var d = new Date();
         var timeHours = d.getHours();
-        var timeMinutes = d.getMinutes();
-        var button = document.getElementsByClassName("flushButton");    
-        document.addEventListener ("click", function() {
+        var timeMinutes = d.getMinutes(); 
+        function playSound() {
           var audio = document.getElementById("audio");
           audio.play();
           alert("flushed! Current time is "+timeHours+":"+timeMinutes);
           window.location="http://127.0.0.1:5000/do-flush";
-        }, false);
+        }
       </script></button></li>
 
     {% if success %}{% endif %}
