@@ -116,7 +116,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_sh
           
           if (key != 'z') {
               return rows.map(function(row) { 
-                  return (Math.floor(2*row[key])); 
+                  return (Math.floor(2*(row[key]/2))); 
                   });
           }
           else {
@@ -147,9 +147,9 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_sh
     height: 480,
     scene: {
         aspectratio: {
-            x: 1,
-            y: 1,
-            z: 1
+            x: 3,
+            y: 3,
+            z: 3
         },
         camera: {
             center: {
@@ -158,14 +158,14 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_sh
                 z: 0
               },
               eye: {
-                x: 1.25,
-                y: 1.25,
+                x: 0.75,
+                y: 5.00,
                 z: 1.25
               },
               up: {
                 x: 0,
                 y: 0,
-                z: 1
+                z: 0
               }
             },
             xaxis: {
@@ -181,8 +181,8 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_sh
               zeroline: false
             }
     },
-    title: 'Location of flushes at specific hour',
-    width: 477
+    title: 'Location of flushes at specific hour in UC',
+    width: 700
   };
 
   Plotly.newPlot('myDiv', data, layout);
