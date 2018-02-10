@@ -8,15 +8,19 @@
   <h1>Flush it yourself!</h1>
   <h2></h2>
   <p>This app supports the following operations:</p>
-  <img src="http://blog.fosketts.net/wp-content/uploads/2012/07/American-Standard-Champion-4-installed.jpg">
   <menu>
     <li><button onclick="playSound()" type="button" class="flushButton"> flush for yourself!
       <audio id="audio" src="{{ url_for('static', filename = 'Toilet_Flushing-KevanGC-917782919.mp3') }}"></audio>
       <script>
-        var button = document.getElementsByClassName("flushButton");
-        document.addEventListener ("click", function() {
-          alert("flushed!");
-        }, false);
+        var d = new Date();
+        var timeHours = d.getHours();
+        var timeMinutes = d.getMinutes(); 
+        function playSound() {
+          var audio = document.getElementById("audio");
+          audio.play();
+          alert("flushed! Current time is "+timeHours+":"+timeMinutes);
+          window.location="http://127.0.0.1:5000/do-flush";
+        }
       </script></button></li>
       
       {% if success %}{% endif %}

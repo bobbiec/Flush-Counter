@@ -100,7 +100,7 @@
         
         if (key != 'z') {
           return rows.map(function(row) { 
-            return (Math.floor(2*row[key])); 
+            return (Math.floor(2*(row[key]/2))); 
           });
         }
         else {
@@ -118,30 +118,43 @@
         marker: {
           color: 'rgb(23, 190, 207)',
           size: 2    
-        }
-      },{
-        alphahull: 7,
-        opacity: 0.1,
-        type: 'mesh3d',
-        x: unpack(rows, 'x'),
-        y: unpack(rows, 'y'),
-        z: unpack(rows, 'z')
-      }];
-      
-      var layout = {
-        autosize: true,
-        height: 480,
-        scene: {
-          aspectratio: {
-            x: 1,
-            y: 1,
-            z: 1
-          },
-          camera: {
-            center: {
-              x: 0,
-              y: 0,
-              z: 0
+        }},{
+          alphahull: 7,
+          opacity: 0.1,
+          type: 'mesh3d',
+          x: unpack(rows, 'x'),
+          y: unpack(rows, 'y'),
+          z: unpack(rows, 'z')
+        }];
+        var layout = {
+          autosize: true,
+          height: 480,
+          scene: {
+            aspectratio: {
+              x: 3,
+              y: 3,
+              z: 3
+            },
+            camera: {
+              center: {
+                x: 0,
+                y: 0,
+                z: 0
+              },
+              eye: {
+                x: 0.75,
+                y: 5.00,
+                z: 1.25
+              },
+              up: {
+                x: 0,
+                y: 0,
+                z: 0
+              }
+            },
+            xaxis: {
+              type: 'linear',
+              zeroline: false
             },
             eye: {
               x: 1.25,
@@ -153,6 +166,7 @@
               y: 0,
               z: 1
             }
+            <<<<<<< HEAD
           },
           xaxis: {
             type: 'linear',
@@ -174,5 +188,18 @@
     });
   </script>
   <a href="{{ url_for('info') }}"><h3 style="text-align:center">How it works --></h3></a>
+  =======
+},
+title: 'Location of flushes at specific hour in UC',
+width: 700
+};
+
+Plotly.newPlot('myDiv', data, layout);
+
+});
+
+</script>
+</body>
+>>>>>>> front_end
 </body>
 </html> 

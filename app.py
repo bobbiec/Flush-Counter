@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import datetime
+from flask import redirect
 
 app = Flask(__name__)
 
@@ -25,8 +26,8 @@ def cartography():
     return render_template('map.html')
 
 @app.route('/simulator')
-def nogoodnames():
-    return render_template('simulator.html')
+def nogoodnames():#success=False):
+    return render_template('simulator.html')#, success=success)
 
 @app.route('/detail')
 def detail():
@@ -44,7 +45,8 @@ def do_flush():
     f.flush_type = 0
     db.session.add(f)
     db.session.commit()
-    return "Successful flush!"
+    #return "Successful flush!"
+    return redirect("simulator")
 
 @app.route('/do-flush-2')
 def do_flush_2():
