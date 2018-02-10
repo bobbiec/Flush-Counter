@@ -1,10 +1,9 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 
 app = Flask(__name__)
-
 
 app.config.from_object('config')
 db = SQLAlchemy(app)
@@ -13,7 +12,9 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def home():
-    return render_template('index.html',values)
+    f = Flush.query.all()
+    flushes = [a.serialize() for a in f]
+    return render_template('index.html',values=flushes)
 
 @app.route('/graphs')
 def giraffe():

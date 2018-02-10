@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Flush Analytics</title>
-  <script src="src/model/Book.js"></script>
 </head>
 <body>
   <h1>Some Data Analysis on Flushes</h1>
@@ -18,16 +17,87 @@
     </menu>
   <!-- Latest compiled and minified plotly.js JavaScript -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <div id="tester" style="width:600px;height:250px;"></div>
+  <div id="tester" style="width:800px;height:500px;"></div>
   <script>
-      var data = [
-          {
-              z: [[1, 20, 30], [20, 1, 60], [30, 60, 1]],
-              type: 'heatmap'
-          }
-      ];
+      var vals = {{ values|tojson }};
 
-      Plotly.newPlot('tester', data);
+      var x_dups = vals.map(a => {
+        d = new Date(a.time);
+        m = d.getMinutes();
+        d.setMinutes(m % 5 >= 3 ? m + (5 - (m%5)) : m - (m % 5));
+        return d;
+      });
+
+      var x_axis1 = [];
+      var y_axis1 = [];
+      var last_x = new Date(2000, 01, 01);
+
+      var i;
+      for (i=0; i<x_dups.length; i++) {
+        x = x_dups[i];
+        if (x <= last_x) {
+          if (x < last_x) {
+            break;
+          }
+          y_axis1[y_axis1.length - 1] += 1;
+        } else {
+          y_axis1.push(1);
+          x_axis1.push(x);
+        }
+        last_x = x;
+      }
+
+      var trace1 = {
+        x: x_axis1,
+        y: y_axis1,
+        type: 'scatter',
+        mode: 'line',
+        line: {
+          shape: 'spline',
+          color: 'royalblue'
+        },
+        name: "men's"
+      };
+
+      var x_axis2 = [];
+      var y_axis2 = [];
+      var last_x = new Date(2000, 01, 01);
+      var j;
+      for (j=i; j<x_dups.length; j++) {
+        x = x_dups[j];
+        if (x <= last_x) {
+          y_axis2[y_axis2.length - 1] += 1;
+        } else {
+          y_axis2.push(1);
+          x_axis2.push(x);
+        }
+        last_x = x;
+      }
+
+      var trace2 = {
+        x: x_axis2,
+        y: y_axis2,
+        type: 'scatter',
+        mode: 'line',
+        line: {
+          shape: 'spline',
+          color: 'hotpink'
+        },
+        name: "women's"
+      };
+      
+      var data = [trace2, trace1];
+      
+      var layout = {
+        title: 'Flushes over time',
+        showlegend: true,
+        yaxis: {
+          range: [0, 8],
+          type: 'linear'
+        }
+      };
+      
+      Plotly.newPlot('tester', data, layout);
   </script>
 </body>
 </html> 
