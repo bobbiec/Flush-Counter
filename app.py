@@ -12,6 +12,10 @@ def home():
 def report_flush():
     if request.method == 'GET':
         return "Get not supported on this page"
-        
+
     # Todo: write to the database
     return "Post success", 200
+
+
+if __name__ == '__main__':
+    app.run()
