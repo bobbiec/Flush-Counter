@@ -13,13 +13,13 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def home():
-    f = Flush.query.all()
-    flushes = [a.serialize() for a in f]
-    return render_template('index.html',values=flushes)
+    return render_template('index.html')
 
 @app.route('/graphs')
-def giraffe():
-    return render_template('graphs.html')
+def graphs():
+    f = Flush.query.filter(Flush.toilet_id != 37).all()
+    flushes = [a.serialize() for a in f]
+    return render_template('graphs.html',values=flushes)
 
 @app.route('/map')
 def cartography():
@@ -40,9 +40,24 @@ def do_flush():
     #return "Successful flush!"
     return redirect("simulator")
 
+@app.route('/do-flush-2')
+def do_flush_2():
+    f = Flush()
+    f.time = datetime.datetime.now()
+    f.toilet_id = 55
+    f.flush_type = 0
+    db.session.add(f)
+    db.session.commit()
+    return "Successful flush!"
+
 @app.route('/stream')
 def stream():
     data = Flush.query.filter_by(toilet_id=37).all()
+    return jsonify([a.serialize() for a in data])
+
+@app.route('/stream-2')
+def stream2():
+    data = Flush.query.filter_by(toilet_id=55).all()
     return jsonify([a.serialize() for a in data])
 
 @app.route('/live')
@@ -74,6 +89,9 @@ def get_all():
     flushes = [a.serialize() for a in f]
     return jsonify(flushes)
 
+@app.route('/info')
+def info():
+    return render_template('info.html')
 
 def seed_data():
     return None 

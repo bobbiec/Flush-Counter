@@ -6,46 +6,14 @@
   <script src="src/model/Book.js"></script>
 </head>
 <body>
-  <h1>G-RAPHS</h1>
+  <h1>LIVE flushing action!</h1>
   <h2></h2>
-  <p>This app supports the following animals:</p>
-  <menu>
-    <li><a href="/"><button type="button">click to go back</button></a></li>
-    </menu>
+  <p>Go to <a href="{{ url_for('simulator') }}">the simulator</a> to contribute to the flushes!</p>
   <!-- Latest compiled and minified plotly.js JavaScript -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <div id="tester" style="width:600px;height:250px;"></div>
+  <div id="graph" style="width:800px;height:600px;"></div>
   <script>
-
-    var data = []
-    
-    var sleep = time => new Promise(resolve => setTimeout(resolve, time))
-    var poll = (promiseFn, time) => promiseFn().then(
-                sleep(time).then(() => poll(promiseFn, time)))
-
-    // Greet the World every second
-    poll(() => new Promise(() => console.log('Hello World!')), 1000)
-
-    function rand() { 
-      return Math.random();
-    }
-
-    Plotly.plot('graph', [{
-      y: [1,2,3].map(rand),
-      mode: 'lines',
-      line: {color: '#80CAF6'}
-    }]);
-
-    var cnt = 0;
-
-    var interval = setInterval(function() {
-  
-      Plotly.extendTraces('graph', {
-       y: [[rand()]]
-     }, [0])
-
-     if(cnt === 100) clearInterval(interval);
-    }, 300);
+    // Maybe someday this will work
   </script>
 </body>
 </html> 
