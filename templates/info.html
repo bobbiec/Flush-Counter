@@ -7,7 +7,9 @@
 <body>
   <h1 style="text-align:center">How it works</h1><br><br>
   <div style="text-align:center">
-    <img src="{{url_for('static', filename='flowchart-4.png')}}">
+    <img src="{{ url_for('static', filename='flowchart-4.png') }}">
   </div>
+  <br><br>
+  <a href="{{ url_for('detail') }}"><h3 style="text-align:center">A deeper look --></h3></a>
 </body>
 </html> 

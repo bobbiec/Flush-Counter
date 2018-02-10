@@ -28,6 +28,14 @@ def cartography():
 def nogoodnames():
     return render_template('simulator.html')
 
+@app.route('/detail')
+def detail():
+    return render_template('detail.html')
+
+@app.route('/impact')
+def impact():
+    return render_template('impact.html')
+
 @app.route('/do-flush')
 def do_flush():
     f = Flush()
