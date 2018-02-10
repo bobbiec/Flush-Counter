@@ -8,18 +8,26 @@
   <h1>Flush it yourself!</h1>
   <h2></h2>
   <p>This app supports the following operations:</p>
-  <img src="http://blog.fosketts.net/wp-content/uploads/2012/07/American-Standard-Champion-4-installed.jpg">
   <menu>
-      <li><button onclick="getElementByID('flushText').InnerHTML = blah"
-      type="button" class="flushButton"> flush for yourself!
+      <li><button onclick="getElementById('flushText').InnerHTML = '<p>blah<p>'" type="button" class="flushButton"> flush for yourself!
+      <audio id="audio" src="{{ url_for('static', filename = 'Toilet_Flushing-KevanGC-917782919.mp3') }}"></audio>
       <script>
-        var button = document.getElementsByClassName("flushButton");
+        var d = new Date();
+        var timeHours = d.getHours();
+        var timeMinutes = d.getMinutes();
+        var button = document.getElementsByClassName("flushButton");    
         document.addEventListener ("click", function() {
-          alert("flushed!");
+          var audio = document.getElementById("audio");
+          audio.play();
+          alert("flushed! Current time is "+timeHours+":"+timeMinutes);
+          window.location="http://127.0.0.1:5000/do-flush";
         }, false);
       </script></button></li>
-    <li><a href="/"><button type="button">click to go back</button></a></li>
+
+    {% if success %}{% endif %}
     <div id="flushText"></div>
+    <img src="http://blog.fosketts.net/wp-content/uploads/2012/07/American-Standard-Champion-4-installed.jpg">
+    <li><a href="/"><button type="button">click to go back</button></a></li>
     </menu>
   </script>
 </body>
