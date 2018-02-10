@@ -16,7 +16,7 @@ def home():
 
 @app.route('/graphs')
 def graphs():
-    f = Flush.query.filter(Flush.toilet_id != 37).all()
+    f = Flush.query.filter(Flush.toilet_id < 37).all()
     flushes = [a.serialize() for a in f]
     return render_template('graphs.html',values=flushes)
 

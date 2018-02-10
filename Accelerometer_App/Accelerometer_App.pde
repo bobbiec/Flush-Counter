@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import ketai.sensors.*;
-
 import java.net.*;
 
 KetaiSensor sensor;
@@ -11,14 +10,14 @@ boolean didFlush;
 int timer;
 
 void setup() {
-  size(1440, 2560); //you can change this to be fullscreen
+  size(1440, 2560);
   frameRate(60);
   sensor = new KetaiSensor(this);
   sensor.start();
   orientation(PORTRAIT);
 
   rectMode(CENTER);
-  textFont(createFont("Arial", 96)); //sets the font to Arial size 20
+  textFont(createFont("Arial", 96));
   textAlign(CENTER);
 }
 
@@ -62,12 +61,5 @@ void sendFlush() {
     System.out.println(e);
   }
   
-  System.out.println(message);
-  
   sent += 1;
-}
-
-void mousePressed()
-{
-
 }
