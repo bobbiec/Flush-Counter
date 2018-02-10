@@ -10,16 +10,19 @@
   <p>This app supports the following operations:</p>
   <img src="http://blog.fosketts.net/wp-content/uploads/2012/07/American-Standard-Champion-4-installed.jpg">
   <menu>
-      <li><button onclick="getElementByID('flushText').InnerHTML = blah"
-      type="button" class="flushButton"> flush for yourself!
+    <li><button onclick="playSound()" type="button" class="flushButton"> flush for yourself!
+      <audio id="audio" src="{{ url_for('static', filename = 'Toilet_Flushing-KevanGC-917782919.mp3') }}"></audio>
       <script>
         var button = document.getElementsByClassName("flushButton");
         document.addEventListener ("click", function() {
           alert("flushed!");
         }, false);
       </script></button></li>
-    <li><a href="/"><button type="button">click to go back</button></a></li>
-    <div id="flushText"></div>
+      
+      {% if success %}{% endif %}
+      <div id="flushText"></div>
+      <img src="http://blog.fosketts.net/wp-content/uploads/2012/07/American-Standard-Champion-4-installed.jpg">
+      <li><a href="/"><button type="button">click to go back</button></a></li>
     </menu>
   </script>
 </body>
