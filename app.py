@@ -54,7 +54,7 @@ def stream():
     return jsonify([a.serialize() for a in data])
 
 @app.route('/stream-2')
-def stream():
+def stream2():
     data = Flush.query.filter_by(toilet_id=55).all()
     return jsonify([a.serialize() for a in data])
 
